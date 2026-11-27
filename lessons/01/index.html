@@ -157,7 +157,7 @@ main{padding:8px 8px 68px}
 #content table.sol{display:table}
 #content .data{display:block;white-space:normal;word-break:break-word}
 #content pre{overflow-x:auto;max-width:100%}
-#content svg{max-width:100%;height:auto}
+#content svg[role="img"]{max-width:100%;height:auto}
 .fig{max-width:100%;overflow:hidden}
 .ask{max-width:100%;padding:12px}
 .row label{min-width:0;width:100%}
@@ -276,7 +276,7 @@ function wire(){
   if(s.rcode!==undefined) wireR(k);
 }
 const MOB=()=>window.matchMedia('(max-width:760px)').matches;
-function fixSvgs(){ document.querySelectorAll('#content svg:not([viewBox])').forEach(g=>{const w=g.getAttribute('width'),h=g.getAttribute('height'); if(w&&h) g.setAttribute('viewBox','0 0 '+parseFloat(w)+' '+parseFloat(h));}); }
+function fixSvgs(){ document.querySelectorAll('#content svg[role="img"]:not([viewBox])').forEach(g=>{const w=g.getAttribute('width'),h=g.getAttribute('height'); if(w&&h) g.setAttribute('viewBox','0 0 '+parseFloat(w)+' '+parseFloat(h));}); }
 new MutationObserver(()=>fixSvgs()).observe(document.getElementById('content'),{childList:true,subtree:true});
 (function(){ let x0=null,y0=null,ok=false; const st=document.getElementById('stage');
   st.addEventListener('touchstart',e=>{const t=e.target; ok=!t.closest('table,pre,textarea,input,.katex-display,.rplot'); x0=e.touches[0].clientX; y0=e.touches[0].clientY;},{passive:true});
