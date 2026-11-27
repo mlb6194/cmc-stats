@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator: upper confidence limit for an SD and %RSD – CMC Stats</title>
 <meta name="description" content="Free calculator for the one-sided upper confidence limit of an SD and %RSD, with every step of the working.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css"><script src="assets/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/katex/katex.min.css"><script src="assets/katex/katex.min.js"></script><link rel="stylesheet" href="assets/site.css"><script src="assets/theme.js"></script>
 </head><body>
 <div id="root" class="theme dark" style="font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg); min-height: 100%">
 <header style="border-bottom: 1px solid var(--line); background: var(--surface)">
@@ -66,7 +66,7 @@
 .lvl{font:600 15px Inter,sans-serif;padding:12px 20px;min-height:44px;border-radius:8px;cursor:pointer;border:1px solid var(--accent);background:var(--surface);color:var(--accent)}
 .lvl.on{background:var(--accent);color:var(--on-accent)}
 .row{display:flex;justify-content:space-between}
-.stp{display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px}
+.stp{display:flex;flex-wrap:wrap;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px}
 .mono{font-family:'JetBrains Mono',monospace}
 </style>
 <script>
@@ -126,10 +126,17 @@ function run(){
    <div class="row"><span>n</span><span>${n}</span></div><div class="row"><span>Mean</span><span>${fmt(mean,4)}</span></div>
    <div class="row"><span>SD, s</span><span>${fmt(s,4)}</span></div><div class="row"><span>%RSD</span><span>${fmt(rsd,2)}%</span></div>
    <div class="row" style="font-weight:500;color:var(--accent)"><span>UCL of %RSD</span><span>${fmt(uclR,2)}%</span></div></div>`;
-  const st=[['Mean',`Σx / n = ${fmt(sum,4)} / ${n}`,fmt(mean,4)],['Sum of squares','Σ(x − x̄)²',fmt(ss,6)],['SD',`√(SS / (n − 1)) = √(${fmt(ss,6)} / ${df})`,fmt(s,4)],
-    ['Degrees of freedom','ν = n − 1',String(df)],['χ² value',`lower ${fmt(alpha*100,0)}% point, ν = ${df}`,fmt(chi,4)],['Multiplier',`√(ν / χ²) = √(${df} / ${fmt(chi,4)})`,fmt(mult,4)],
-    ['UCL of the SD','s × multiplier',fmt(ucl,4)],['UCL of the %RSD','100 × UCL / x̄',fmt(uclR,2)+'%']];
-  document.getElementById('steps').innerHTML=st.map((r,i)=>`<li class="stp"><span class="mono" style="font-size:14px;color:var(--accent);width:24px">${i+1}</span><span style="font-size:15px;font-weight:600;flex:0 1 220px">${r[0]}</span><span class="mono" style="font-size:15px;color:var(--muted);flex:1 1 300px">${r[1]}</span><span class="mono" style="font-size:15px;font-weight:500">${r[2]}</span></li>`).join('');
+  const T=(t)=>{try{return katex.renderToString('\\displaystyle '+t,{throwOnError:false});}catch(e){return t;}};
+  const st=[
+    ['Mean', T(`\\bar x = \\frac{\\sum x}{n} = \\frac{${+sum.toFixed(6)}}{${n}}`), fmt(mean,4)],
+    ['Sum of squares', T(`\\sum (x - \\bar x)^2`), fmt(ss,6)],
+    ['SD', T(`s = \\sqrt{\\frac{\\sum (x-\\bar x)^2}{n-1}} = \\sqrt{\\frac{${fmt(ss,6)}}{${df}}}`), fmt(s,4)],
+    ['Degrees of freedom', T(`\\nu = n - 1`), String(df)],
+    ['χ² value', T(`\\chi^2_{${fmt(alpha,2)},\\,${df}}`)+` <span style="font-size:13px">(lower ${fmt(alpha*100,0)}% point)</span>`, fmt(chi,4)],
+    ['Multiplier', T(`\\sqrt{\\frac{\\nu}{\\chi^2}} = \\sqrt{\\frac{${df}}{${fmt(chi,4)}}}`), fmt(mult,4)],
+    ['UCL of the SD', T(`s \\times \\text{multiplier} = ${fmt(s,4)} \\times ${fmt(mult,4)}`), fmt(ucl,4)],
+    ['UCL of the %RSD', T(`100 \\times \\frac{\\text{UCL}}{\\bar x} = 100 \\times \\frac{${fmt(ucl,4)}}{${fmt(mean,4)}}`), fmt(uclR,2)+'%']];
+  document.getElementById('steps').innerHTML=st.map((r,i)=>`<li class="stp"><span class="mono" style="font-size:14px;color:var(--accent);width:24px">${i+1}</span><span style="font-size:15px;font-weight:600;flex:0 1 200px">${r[0]}</span><span style="font-size:17px;color:var(--ink-soft);flex:1 1 320px">${r[1]}</span><span class="mono" style="font-size:16px;font-weight:500">${r[2]}</span></li>`).join('');
 }
 document.getElementById('calc-data').addEventListener('input',run);
 document.getElementById('calc-limit').addEventListener('input',run);
