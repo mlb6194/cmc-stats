@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pharma Stats for CMC – worked statistics for pharma manufacturing</title><meta name="description" content="Worked examples, practice problems and industry scenarios for CMC statistics: method validation, transfer, stability and capability, by hand, in JMP and in R.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css"><script src="assets/theme.js"></script>
+</head><body>
+
+
+<div id="root" class="theme dark" style="font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg); min-height: 100%">
+
+<header style="border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav style="max-width: 1120px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+<a href="index.html" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 20px; color: var(--ink); text-decoration: none; flex-grow: 1">Pharma Stats <span class="glow" style="color: var(--accent)">for CMC</span></a>
+<a href="#free-lesson" style="font-size: 15px; color: var(--ink); text-decoration: none">Free lesson</a>
+<a href="calculator.html" style="font-size: 15px; color: var(--ink); text-decoration: none">Calculators</a>
+<a href="intervals.html" style="font-size: 15px; color: var(--ink); text-decoration: none">Articles</a>
+<a href="#about" style="font-size: 15px; color: var(--ink); text-decoration: none">About</a>
+<button type="button" class="theme-toggle" aria-label="Switch theme" style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0"><svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+<a href="#buy" style="font-size: 15px; font-weight: 600; color: var(--on-accent); background: var(--accent); padding: 12px 18px; border-radius: 8px; text-decoration: none">Course on Teachable</a>
+</nav>
+</header>
+
+<section style="max-width: 1120px; margin: 0 auto; padding: 80px 24px 64px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0">
+<p style="margin: 0 0 16px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent)">CMC statistics, worked by hand</p>
+<h1 style="margin: 0 0 24px; font-family: Inter, sans-serif; font-weight: 600; font-size: 52px; line-height: 1.08">Do it by hand. Check it in JMP and R. Defend it in an audit.</h1>
+<p style="margin: 0 0 32px; font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 560px">Worked examples, practice problems and real industry scenarios for the statistics behind method validation, method transfer, stability and process capability.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#free-lesson" style="font-size: 16px; font-weight: 600; color: var(--on-accent); background: var(--accent); padding: 14px 22px; border-radius: 8px; text-decoration: none">Start the free lesson</a>
+<a href="#buy" style="font-size: 16px; font-weight: 600; color: var(--accent); background: var(--surface); border: 1px solid var(--accent); padding: 13px 22px; border-radius: 8px; text-decoration: none">See the full course</a>
+</div>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px">
+<p style="margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--muted)">From lesson 01 · upper confidence limit for an SD</p>
+<p style="margin: 0 0 20px; font-size: 13px; color: var(--muted)">Purity (%), n = 6, synthetic data</p>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 2; border-top: 1px solid var(--line); padding-top: 12px">
+<div style="display: flex; justify-content: space-between"><span>x̄</span><span>98.4567</span></div>
+<div style="display: flex; justify-content: space-between"><span>s</span><span>0.1065</span></div>
+<div style="display: flex; justify-content: space-between"><span>χ²(0.05, 5)</span><span>1.1455</span></div>
+<div style="display: flex; justify-content: space-between"><span>√(5 / 1.1455)</span><span>2.0893</span></div>
+<div class="glow" style="display: flex; justify-content: space-between; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; font-weight: 500; color: var(--accent)"><span>UCL₉₅(σ)</span><span>0.2225</span></div>
+</div>
+<p style="margin: 16px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted)">Every step on its own line, then the same answer in JMP and in R.</p>
+</div>
+</section>
+
+<section style="background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 56px 24px">
+<h2 style="margin: 0 0 32px; font-family: Inter, sans-serif; font-weight: 600; font-size: 30px">Built for people who sign off on the numbers</h2>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+<div><h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 600">QC and analytical scientists</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Method validation, transfer and system suitability.</p></div>
+<div><h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 600">Validation, MSAT and CPV engineers</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">PPQ capability and continued process verification.</p></div>
+<div><h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 600">QA reviewers</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Know what to question in a statistics section.</p></div>
+<div><h3 style="margin: 0 0 8px; font-size: 17px; font-weight: 600">Statisticians new to GMP</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Where the methods sit in ICH, USP and FDA guidance.</p></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1120px; margin: 0 auto; padding: 72px 24px">
+<h2 style="margin: 0 0 8px; font-family: Inter, sans-serif; font-weight: 600; font-size: 30px">The course</h2>
+<p style="margin: 0 0 32px; font-size: 17px; color: var(--muted)">Five modules, in order of complexity. New topics are added as free updates.</p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); width: 32px">F</span>
+<span style="font-weight: 600; font-size: 17px; flex: 0 1 260px">Foundations</span>
+<span style="font-size: 15px; color: var(--muted); flex: 1 1 400px">Confidence, prediction and tolerance intervals · equal-variance tests · normality and outliers · regression</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--muted)">Coming soon</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); width: 32px">A</span>
+<span style="font-weight: 600; font-size: 17px; flex: 0 1 260px">Precision and comparison</span>
+<span style="font-size: 15px; color: var(--muted); flex: 1 1 400px">UCL for SD and %RSD · TOST equivalence · variance components and intermediate precision</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--accent)">Available</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); width: 32px">B</span>
+<span style="font-weight: 600; font-size: 17px; flex: 0 1 260px">Product and process</span>
+<span style="font-size: 15px; color: var(--muted); flex: 1 1 400px">Stability under ICH Q1E · process capability, Ppk · non-parametric Ppk</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--accent)">Available</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); width: 32px">C</span>
+<span style="font-weight: 600; font-size: 17px; flex: 0 1 260px">Extensions</span>
+<span style="font-size: 15px; color: var(--muted); flex: 1 1 400px">Control charts for CPV · method validation · method comparison · gauge R&amp;R · dissolution f2 · sample size</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--muted)">Coming soon</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--accent); width: 32px">D</span>
+<span style="font-weight: 600; font-size: 17px; flex: 0 1 260px">Industry scenarios</span>
+<span style="font-size: 15px; color: var(--muted); flex: 1 1 400px">Method transfer · PPQ to CPV · shelf life · setting specifications · process change · OOT investigation</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--muted)">Coming soon</span>
+</div>
+</div>
+</section>
+
+<section style="background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 64px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 320px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-family: Inter, sans-serif; font-weight: 600; font-size: 30px">Every lesson, the same way</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: var(--muted)">So you always know where you are, and can find the step you need months later.</p>
+</div>
+<ol style="flex: 2 1 560px; min-width: 0; margin: 0; padding-left: 22px; font-size: 16px; line-height: 1.6; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; row-gap: 10px">
+<li>Why it matters, with the regulatory context</li>
+<li>Concept slides, one step per screen</li>
+<li>Worked example, one step per line</li>
+<li>JMP and R walkthroughs on the same Excel file</li>
+<li>Three practice problems, less help each time</li>
+<li>Check, hint and reveal each step</li>
+<li>Full solutions with JMP output and R code</li>
+<li>What a reviewer will ask, with model answers</li>
+</ol>
+</div>
+</section>
+
+<section id="free-lesson" style="max-width: 1120px; margin: 0 auto; padding: 72px 24px">
+<h2 style="margin: 0 0 8px; font-family: Inter, sans-serif; font-weight: 600; font-size: 30px">Free to use</h2>
+<p style="margin: 0 0 32px; font-size: 17px; color: var(--muted)">Try the format before you buy. No sign-up.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<a href="lessons/01/" style="display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; text-decoration: none; color: var(--ink)">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: var(--accent)">FREE LESSON</p>
+<h3 style="margin: 0 0 8px; font-family: Inter, sans-serif; font-size: 21px; font-weight: 600">01 · Upper confidence limit for an SD</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">The full lesson: slides, worked PDF, Excel data, practice page and solutions.</p>
+</a>
+<a href="calculator.html" style="display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; text-decoration: none; color: var(--ink)">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: var(--accent)">CALCULATOR</p>
+<h3 style="margin: 0 0 8px; font-family: Inter, sans-serif; font-size: 21px; font-weight: 600">UCL for an SD and %RSD</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Paste your results, get the bound and every step of the working.</p>
+</a>
+<a href="#dataset" style="display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; text-decoration: none; color: var(--ink)">
+<p style="margin: 0 0 12px; font-size: 13px; font-weight: 600; color: var(--accent)">DATASET</p>
+<h3 style="margin: 0 0 8px; font-family: Inter, sans-serif; font-size: 21px; font-weight: 600">Fill weight, 30 batches</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">A synthetic dataset with a quirk hidden in it. Can you find it?</p>
+</a>
+</div>
+</section>
+
+<section style="background: var(--surface); border-top: 1px solid var(--line)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 64px 24px">
+<h2 style="margin: 0 0 32px; font-family: Inter, sans-serif; font-weight: 600; font-size: 30px">Articles</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px">
+<a href="intervals.html" style="text-decoration: none; color: var(--ink)"><h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 600">Confidence, prediction or tolerance interval?</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Three intervals, one dataset, three very different answers.</p></a>
+<a href="#article-ppk" style="text-decoration: none; color: var(--ink)"><h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 600">Why PPQ reports Ppk, not Cpk</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">Within-batch and between-batch variation, and why it matters.</p></a>
+<a href="#article-q1e" style="text-decoration: none; color: var(--ink)"><h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 600">Why ICH Q1E pools at α = 0.25</h3><p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted)">The poolability test, and what happens when one batch is different.</p></a>
+</div>
+</div>
+</section>
+
+<section id="buy" style="background: var(--accent); color: var(--on-accent)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 64px 24px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-family: Inter, sans-serif; font-weight: 600; font-size: 34px">The full course on Teachable</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: var(--on-accent-soft)">All modules, every dataset, practice problems with solutions, and future updates. Team licences available for QC and CMC groups.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<span style="font-family: Inter, sans-serif; font-size: 28px; font-weight: 600">Coming soon</span>
+<a href="#buy" aria-disabled="true" title="Teachable link added at launch" style="font-size: 16px; font-weight: 600; color: var(--accent); background: var(--surface); padding: 14px 22px; border-radius: 8px; text-decoration: none">Enrol on Teachable</a>
+<a href="mailto:micl.brett@gmail.com?subject=Team%20licence" style="font-size: 16px; font-weight: 600; color: var(--on-accent); border: 1px solid var(--on-accent); padding: 13px 22px; border-radius: 8px; text-decoration: none">Team licence</a>
+</div>
+</div>
+</section>
+
+<section id="about" style="max-width: 1120px; margin: 0 auto; padding: 64px 24px; display: flex; flex-wrap: wrap; gap: 32px">
+<div style="flex: 0 0 120px; height: 120px; border-radius: 60px; background: var(--accent-tint); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted)">[PHOTO]</div>
+<div style="flex: 1 1 520px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-family: Inter, sans-serif; font-weight: 600; font-size: 26px">About Michael Brett</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 680px">Over twenty years teaching mathematics, then a move into data science and pharmaceutical manufacturing as a site statistician. MSc in Industrial and Financial Mathematics, PGCert in Applied Statistics. This course is the one I wish I had when I started. More of my work: <a href="https://mlb6194.github.io/">mlb6194.github.io</a>.</p>
+</div>
+</section>
+
+<footer style="border-top: 1px solid var(--line)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px; font-size: 13px; line-height: 1.6; color: var(--muted)">
+<p style="margin: 0 0 8px">All data on this site and in the course are synthetic. Specification limits and acceptance criteria are placeholders. Training material only, not regulatory advice.</p>
+<p style="margin: 0">© 2026 Michael Brett · Hosted on GitHub Pages</p>
+</div>
+</footer>
+
+</div>
+
+</body></html>

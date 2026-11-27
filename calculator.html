@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator: upper confidence limit for an SD and %RSD – Pharma Stats for CMC</title>
+<meta name="description" content="Free calculator for the one-sided upper confidence limit of an SD and %RSD, with every step of the working.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css"><script src="assets/theme.js"></script>
+</head><body>
+<div id="root" class="theme dark" style="font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg); min-height: 100%">
+<header style="border-bottom: 1px solid var(--line); background: var(--surface)">
+<nav style="max-width: 1120px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+<a href="index.html" style="font-family: Inter, sans-serif; font-weight: 600; font-size: 20px; color: var(--ink); text-decoration: none; flex-grow: 1">Pharma Stats <span class="glow" style="color: var(--accent)">for CMC</span></a>
+<a href="#free-lesson" style="font-size: 15px; color: var(--ink); text-decoration: none">Free lesson</a>
+<a href="calculator.html" style="font-size: 15px; color: var(--accent); font-weight: 600; text-decoration: none">Calculators</a>
+<a href="intervals.html" style="font-size: 15px; color: var(--ink); text-decoration: none">Articles</a>
+<a href="#about" style="font-size: 15px; color: var(--ink); text-decoration: none">About</a>
+<button type="button" class="theme-toggle" aria-label="Switch theme" style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0"><svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg><svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+<a href="#buy" style="font-size: 15px; font-weight: 600; color: var(--on-accent); background: var(--accent); padding: 12px 18px; border-radius: 8px; text-decoration: none">Course on Teachable</a>
+</nav>
+</header>
+<main style="max-width: 1120px; margin: 0 auto; padding: 56px 24px 72px">
+<p style="margin: 0 0 12px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent)">Free calculator</p>
+<h1 style="margin: 0 0 12px; font-family: Inter, sans-serif; font-weight: 600; font-size: 42px; line-height: 1.1">Upper confidence limit for an SD and %RSD</h1>
+<p style="margin: 0 0 40px; font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 720px">Paste your replicate results. You get the one-sided upper bound for the SD and %RSD, and every step of the working so you can check it by hand.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 420px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="calc-data" style="font-size: 15px; font-weight: 600">Results, one per line or separated by commas</label>
+<textarea id="calc-data" rows="8" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; line-height: 1.5; padding: 12px; border: 1px solid var(--line-strong); border-radius: 8px; resize: vertical; color: var(--ink); background: var(--field)">98.42
+98.55
+98.31
+98.60
+98.47
+98.39</textarea>
+<p style="margin: 0; font-size: 13px; color: var(--muted)">Example loaded: Purity (%) from lesson 01, synthetic data. Nothing you type leaves your browser.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; font-weight: 600">Confidence, one-sided</span>
+<div id="levels" style="display: flex; gap: 8px; flex-wrap: wrap">
+<button type="button" class="lvl" data-c="0.90">90%</button><button type="button" class="lvl on" data-c="0.95">95%</button><button type="button" class="lvl" data-c="0.99">99%</button>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="calc-limit" style="font-size: 15px; font-weight: 600">Acceptance limit for the SD (optional)</label>
+<input id="calc-limit" type="text" inputmode="decimal" value="0.30" placeholder="e.g. 0.30" style="font-family: 'JetBrains Mono', monospace; font-size: 15px; padding: 12px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink); background: var(--field); max-width: 200px">
+</div></div>
+<div id="result" style="flex: 1 1 420px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px"></div>
+</div>
+<section id="steps-sec" style="margin-top: 48px">
+<h2 style="margin: 0 0 8px; font-weight: 600; font-size: 28px">The working, step by step</h2>
+<p style="margin: 0 0 24px; font-size: 16px; color: var(--muted)">The same steps as the hand calculation in lesson 01.</p>
+<ol id="steps" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"></ol>
+<p style="margin: 16px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted)">The %RSD bound divides the SD's bound by the mean, the simple approximation used in lesson 01. The χ² interval assumes the results are normally distributed: check that first.</p>
+</section>
+<section style="margin-top: 48px; background: var(--accent-tint); border-radius: 12px; padding: 32px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center">
+<div style="flex: 1 1 480px; min-width: 0">
+<h2 style="margin: 0 0 8px; font-weight: 600; font-size: 24px">Why one-sided? Why the lower χ² tail?</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-soft)">Lesson 01 explains the method, works it by hand, and checks it in JMP and R. It's free, and includes three practice problems with solutions.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="lessons/01/" style="font-size: 16px; font-weight: 600; color: var(--on-accent); background: var(--accent); padding: 14px 22px; border-radius: 8px; text-decoration: none">Free lesson 01</a>
+<a href="index.html#buy" style="font-size: 16px; font-weight: 600; color: var(--accent); background: var(--surface); border: 1px solid var(--accent); padding: 13px 22px; border-radius: 8px; text-decoration: none">Full course</a>
+</div></section>
+</main>
+<footer style="border-top: 1px solid var(--line)"><div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px; font-size: 13px; line-height: 1.6; color: var(--muted)">
+<p style="margin: 0 0 8px">For learning and checking hand calculations. Validate any calculation used for GMP decisions in your own validated software.</p>
+<p style="margin: 0">© 2026 Michael Brett · Hosted on GitHub Pages</p></div></footer>
+</div>
+<style>
+.lvl{font:600 15px Inter,sans-serif;padding:12px 20px;min-height:44px;border-radius:8px;cursor:pointer;border:1px solid var(--accent);background:var(--surface);color:var(--accent)}
+.lvl.on{background:var(--accent);color:var(--on-accent)}
+.row{display:flex;justify-content:space-between}
+.stp{display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px}
+.mono{font-family:'JetBrains Mono',monospace}
+</style>
+<script>
+const M = {
+lgamma(z) {
+  var g = 7, c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+  if (z < 0.5) { return Math.log(Math.PI / Math.sin(Math.PI * z)) - this.lgamma(1 - z); }
+  z -= 1; var x = c[0];
+  for (var i = 1; i < g + 2; i++) { x += c[i] / (z + i); }
+  var t = z + g + 0.5;
+  return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+  },
+  gammaP(a, x) {
+  if (x <= 0) { return 0; }
+  var gln = this.lgamma(a);
+  if (x < a + 1) {
+  var ap = a, sum = 1 / a, del = sum;
+  for (var n = 0; n < 500; n++) { ap += 1; del *= x / ap; sum += del; if (Math.abs(del) < Math.abs(sum) * 1e-14) { break; } }
+  return sum * Math.exp(-x + a * Math.log(x) - gln);
+  }
+  var b = x + 1 - a, cc = 1 / 1e-300, d = 1 / b, h = d;
+  for (var i = 1; i < 500; i++) {
+  var an = -i * (i - a); b += 2;
+  d = an * d + b; if (Math.abs(d) < 1e-300) { d = 1e-300; }
+  cc = b + an / cc; if (Math.abs(cc) < 1e-300) { cc = 1e-300; }
+  d = 1 / d; var dl = d * cc; h *= dl;
+  if (Math.abs(dl - 1) < 1e-14) { break; }
+  }
+  return 1 - Math.exp(-x + a * Math.log(x) - gln) * h;
+  },
+  chi2inv(p, k) {
+  var lo = 0, hi = k + 40 * Math.sqrt(2 * k) + 100;
+  for (var i = 0; i < 200; i++) {
+  var mid = (lo + hi) / 2;
+  if (this.gammaP(k / 2, mid / 2) < p) { lo = mid; } else { hi = mid; }
+  }
+  return (lo + hi) / 2;
+  }
+  };
+M.lgamma=M.lgamma.bind(M); M.gammaP=M.gammaP.bind(M); M.chi2inv=M.chi2inv.bind(M);
+let conf=0.95;
+const fmt=(v,d)=>Number(v).toFixed(d);
+const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function run(){
+  const text=document.getElementById('calc-data').value, lim=parseFloat(document.getElementById('calc-limit').value);
+  const xs=text.split(/[\s,;]+/).filter(t=>t.length).map(Number), R=document.getElementById('result'), S=document.getElementById('steps-sec');
+  if(xs.some(v=>!isFinite(v))||xs.length<3){R.innerHTML='<p style="margin:0;font-size:16px;color:var(--bad)">'+(xs.length<3?'Enter at least three results to calculate a bound.':'One of the entries is not a number. Use one result per line, or commas between results.')+'</p>';S.style.display='none';return;}
+  S.style.display='';
+  const n=xs.length,sum=xs.reduce((a,b)=>a+b,0),mean=sum/n,ss=xs.reduce((a,v)=>a+(v-mean)*(v-mean),0),df=n-1,s=Math.sqrt(ss/df);
+  const alpha=1-conf,chi=M.chi2inv(alpha,df),mult=Math.sqrt(df/chi),ucl=s*mult,rsd=100*s/mean,uclR=100*ucl/mean;
+  let v='';
+  if(isFinite(lim)&&lim>0){const ok=ucl<=lim;v=`<p style="margin:0 0 20px;padding:12px 16px;border-radius:8px;font-size:15px;font-weight:600;background:${ok?'var(--accent-tint)':'var(--bad-tint)'};color:${ok?'var(--accent-strong)':'var(--bad)'}">${ok?'Meets':'Does not meet'} the limit: UCL ${fmt(ucl,4)} ${ok?'≤':'>'} ${esc(lim)}</p>`;}
+  R.innerHTML=`<p style="margin:0 0 4px;font-size:14px;font-weight:600;color:var(--muted)">${Math.round(conf*100)}% upper confidence limit for the SD</p>
+   <p class="glow mono" style="margin:0 0 4px;font-size:44px;font-weight:500;color:var(--accent)">${fmt(ucl,4)}</p>
+   <p style="margin:0 0 20px;font-size:15px;color:var(--muted)">Point estimate s = ${fmt(s,4)}, so the bound is ${fmt((mult-1)*100,0)}% larger.</p>${v}
+   <div class="mono" style="font-size:15px;line-height:2;border-top:1px solid var(--line);padding-top:12px">
+   <div class="row"><span>n</span><span>${n}</span></div><div class="row"><span>Mean</span><span>${fmt(mean,4)}</span></div>
+   <div class="row"><span>SD, s</span><span>${fmt(s,4)}</span></div><div class="row"><span>%RSD</span><span>${fmt(rsd,2)}%</span></div>
+   <div class="row" style="font-weight:500;color:var(--accent)"><span>UCL of %RSD</span><span>${fmt(uclR,2)}%</span></div></div>`;
+  const st=[['Mean',`Σx / n = ${fmt(sum,4)} / ${n}`,fmt(mean,4)],['Sum of squares','Σ(x − x̄)²',fmt(ss,6)],['SD',`√(SS / (n − 1)) = √(${fmt(ss,6)} / ${df})`,fmt(s,4)],
+    ['Degrees of freedom','ν = n − 1',String(df)],['χ² value',`lower ${fmt(alpha*100,0)}% point, ν = ${df}`,fmt(chi,4)],['Multiplier',`√(ν / χ²) = √(${df} / ${fmt(chi,4)})`,fmt(mult,4)],
+    ['UCL of the SD','s × multiplier',fmt(ucl,4)],['UCL of the %RSD','100 × UCL / x̄',fmt(uclR,2)+'%']];
+  document.getElementById('steps').innerHTML=st.map((r,i)=>`<li class="stp"><span class="mono" style="font-size:14px;color:var(--accent);width:24px">${i+1}</span><span style="font-size:15px;font-weight:600;flex:0 1 220px">${r[0]}</span><span class="mono" style="font-size:15px;color:var(--muted);flex:1 1 300px">${r[1]}</span><span class="mono" style="font-size:15px;font-weight:500">${r[2]}</span></li>`).join('');
+}
+document.getElementById('calc-data').addEventListener('input',run);
+document.getElementById('calc-limit').addEventListener('input',run);
+document.querySelectorAll('.lvl').forEach(b=>b.addEventListener('click',()=>{conf=+b.dataset.c;document.querySelectorAll('.lvl').forEach(x=>x.classList.toggle('on',x===b));run();}));
+run();
+</script>
+</body></html>
