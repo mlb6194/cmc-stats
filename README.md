@@ -1,6 +1,6 @@
-# Pharma Stats for CMC – companion site
+# CMC Stats – companion site
 
-Free lesson, calculators and articles for the Pharma Stats for CMC course. Plain HTML, no build step.
+Free lesson, calculators and articles for the CMC Stats course. Plain HTML, no build step.
 
 - `index.html` – home page
 - `calculator.html` – upper confidence limit for an SD and %RSD
